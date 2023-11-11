@@ -18,7 +18,7 @@
       await new Promise(resolve => setTimeout(resolve, delayInSeconds * 1000));
 
       // Show the text after the delay
-      outputDiv.innerHTML = `<p>${text}</p>`;
+      outputDiv.innerText =text;
     }
 
     const btn = document.getElementById('btn');

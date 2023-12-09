@@ -1,25 +1,25 @@
-//your JS code here. If required.
- async function delayAndShowText() {
-      const textInput = document.getElementById('text');
-      const delayInput = document.getElementById('delay');
-      const outputDiv = document.getElementById('output');
+// Function to display the message after a delay
+async function showMessage() {
+    const textInput = document.getElementById('text').value;
+    const delayInput = document.getElementById('delay').value;
 
-      const text = textInput.value;
-      const delayInSeconds = parseFloat(delayInput.value);
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerText = ''; // Clear previous content
 
-      if (!text || isNaN(delayInSeconds)) {
-        alert('Please enter valid text and delay.');
-        return;
-      }
+    try {
+        // Convert delayInput to milliseconds (assuming input is in seconds)
+        const delayInMillis = delayInput * 1000;
 
-      outputDiv.innerHTML = ''; // Clear previous output
+        // Wait for the specified delay using setTimeout wrapped in a Promise
+        await new Promise(resolve => setTimeout(resolve, delayInMillis));
 
-      // Using async/await to introduce delay
-      await new Promise(resolve => setTimeout(resolve, delayInSeconds * 1000));
-
-      // Show the text after the delay
-      outputDiv.innerText =text;
+        // Display the text after the delay
+        outputDiv.innerText = textInput;
+    } catch (error) {
+        console.error('Error occurred:', error);
+        outputDiv.innerText = 'An error occurred.';
     }
+}
 
-    const btn = document.getElementById('btn');
-    btn.addEventListener('click', delayAndShowText);
+// Attach event listener to the button
+document.getElementById('btn').addEventListener('click', showMessage);

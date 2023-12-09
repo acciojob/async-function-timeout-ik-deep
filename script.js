@@ -11,15 +11,13 @@ async function showMessage() {
         const delayInMillis = delayInput * 1000;
 
         // Wait for the specified delay using setTimeout wrapped in a Promise
-        await setTimeout(()=>{
-			outputDiv.innerText = textInput;
-		} , delayInMillis));
+        await new Promise(resolve=> setTimeout(resolve, delayInMillis));
 
         // Display the text after the delay
-        
+        outputDiv.innerText = textInput;
     } catch (error) {
         console.error('Error occurred:', error);
-        outputDiv.innerText = 'An error occurred.';
+        outputDiv.innerText = 'An error occurred.'+ error;
     }
 }
 
@@ -27,7 +25,7 @@ async function showMessage() {
 document.getElementById('btn').addEventListener('click', showMessage);
 
 () => {
-  const delay = 1000;
+  const delay = 21000;
   const text = "Test - 1";
 
   cy.visit(baseUrl + "/main.html");
